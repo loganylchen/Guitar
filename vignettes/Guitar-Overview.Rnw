@@ -20,7 +20,7 @@
 \newcommand{\bam}{\texttt{BAM}}
 
 
-\title{An Introduction to \Rpackage{Guitar}}
+\title{An Introduction to \Rpackage{Guitar} Package}
 \author{Jia Meng, PhD}
 \date{Modified: 25 Sept, 2015. Compiled: \today}
 
@@ -163,13 +163,13 @@ mcols(gc_txdb)
 We can also check the distribution of the Guitar coordinates built. Firstly, extract these RNA components
 
 <<label=comp,eval=TRUE>>=
-TravisCoords <- gc_txdb
-type <- paste(mcols(TravisCoords)$comp,mcols(TravisCoords)$category)
+GuitarCoords <- gc_txdb
+type <- paste(mcols(GuitarCoords)$comp,mcols(GuitarCoords)$category)
 key <- unique(type)
 landmark <- list(1,2,3,4,5,6,7,8)
 names(landmark) <- key  
 for (i in 1:length(key)) {
-  landmark[[i]] <- TravisCoords[type==key[i]]
+  landmark[[i]] <- GuitarCoords[type==key[i]]
 }
 @
 

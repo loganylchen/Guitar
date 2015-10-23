@@ -1,8 +1,8 @@
 Package: Guitar
 Type: Package
 Title: Guitar
-Version: 1.5.0
-Date: 2015-10-22
+Version: 1.7.0
+Date: 2015-10-23
 Author: Jia Meng
 Maintainer: Jia Meng <jia.meng@xjtlu.edu.cn>
 Description: The package is designed for visualization 
