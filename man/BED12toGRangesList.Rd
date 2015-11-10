@@ -8,12 +8,15 @@ BED12toGRangesList
 read bed12 format into R as GRangesList object
 }
 \usage{
-BED12toGRangesList(filepath)
+BED12toGRangesList(filepath, header)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{filepath}{
 the path where the bed12 file is located
+}
+  \item{header}{
+whether the bed12 file has header or not, default: FALSE
 }
 }
 \details{
