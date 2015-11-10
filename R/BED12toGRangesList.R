@@ -1,20 +1,20 @@
 
 
-BED12toGRangesList <- function(filepath) {
+BED12toGRangesList <- function(filepath, header=FALSE) {
   
   # message
   print("Converting BED12 to GRangesList")
   print("It may take a few minutes")
   
   # read bed file
-  a = read.table(filepath,sep="\t",header=TRUE,stringsAsFactors =FALSE)
+  a = read.table(filepath,sep="\t",header=header,stringsAsFactors =FALSE)
   # mcols_info =a[,13:length(a[1,])]
   a = a[,1:12]
   
   # get transcripts
   no_tx = length(a[,1])
   tx_id = 1:no_tx;
-  tx_name = paste("line1",1:no_tx,sep="")
+  tx_name = paste("line_",1:no_tx,sep="")
   tx_chrom = a[,1]
   tx_strand = a[,6]
   tx_start = a[,2]+1
