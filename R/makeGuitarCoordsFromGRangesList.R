@@ -58,7 +58,7 @@ makeGuitarCoordsFromGRangesList <- function(comp,
   binWidth=51) {
   
   # get checkpoints
-  checkpoints <- round(checkpoints_interval*(index-0.5))
+  checkpoints <- ceiling(checkpoints_interval*(index-0.5))
   checkpoints_transcript <- GRanges(seqnames=tx_name,
                                     IRanges(start=checkpoints, end=checkpoints, names=tx_name),
                                     strand=strand)
@@ -67,7 +67,7 @@ makeGuitarCoordsFromGRangesList <- function(comp,
   checkPoints_genomic <- mapFromTranscripts(checkpoints_transcript, comp)
   
   # resize
-  # binWidth <- 4*round(checkpoints_interval)+1
+  # binWidth <- 4*ceiling(checkpoints_interval)+1
   checkRegion_genomic <- resize(x=checkPoints_genomic, 
                                 width=binWidth, 
                                 fix="center")
