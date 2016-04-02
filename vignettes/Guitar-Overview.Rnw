@@ -22,7 +22,7 @@
 
 \title{An Introduction to \Rpackage{Guitar} Package}
 \author{Jia Meng, PhD}
-\date{Modified: 25 Sept, 2015. Compiled: \today}
+\date{Modified: 2 April, 2016. Compiled: \today}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
@@ -66,12 +66,12 @@ txdb_file <- system.file("extdata", "hg19_toy.sqlite",
                          package="Guitar")
 txdb <- loadDb(txdb_file)
 # Or use makeTxDbFromUCSC() to download TxDb from internet
-# txdb <- makeTxDbFromUCSC(genome="hg19)
+# txdb <- makeTxDbFromUCSC(genome="hg19")
 @
 
 With a \Rclass{TxDb} object that contains gene annotation information, we in the next build \Rclass{Guitar coordiantes}, which is essentially a bridge connects the transcriptomic landmarks and genomic coordinates. The parameter \Rcode{noBins=20} defines the resolution of your analysis. Higher resolution will lead to finer details revealed and increased computation time and memory usage.
 <<guitar coordiantes>>=
-gc_txdb <- makeGuitarCoordsFromTxDb(txdb, noBins=20)
+gc_txdb <- makeGuitarCoordsFromTxDb(txdb, noBins=100)
 @
 
 You may now generate the Guitar plot from the named list of genome-based features and the prebuilt \Rclass{Guitar coordinates}.
@@ -160,7 +160,28 @@ mcols(gc_txdb)
 @
 
 \section{Check the Overlapping between Different Components} 
-We can also check the distribution of the Guitar coordinates built. Firstly, extract these RNA components
+
+We can also check the distribution of the Guitar coordinates built. 
+
+<<label=lcp3,fig=TRUE,echo=TRUE,height=6,width=12>>=
+GuitarCoords <- reduce(gc_txdb)  # extract the coordinates
+gcl <- list(GuitarCoords) # put into a list
+GuitarPlot(gfeatures = gcl,
+           GuitarCoordsFromTxDb = gc_txdb,
+           rescaleComponent=TRUE)
+@
+
+or, check without rescaling
+
+<<label=lcp2,fig=TRUE,echo=TRUE,height=6,width=12>>=
+GuitarCoords <- reduce(gc_txdb)  # extract the coordinates
+gcl <- list(GuitarCoords) # put into a list
+GuitarPlot(gfeatures = gcl,
+           GuitarCoordsFromTxDb = gc_txdb,
+           rescaleComponent=FALSE)
+@
+
+Alternatively, we can extract the RNA components
 
 <<label=comp,eval=TRUE>>=
 GuitarCoords <- gc_txdb
