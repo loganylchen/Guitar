@@ -25,9 +25,11 @@ GuitarPlot <- function(gfeatures,
       txdb <- suppressMessages(makeTxDbFromUCSC(genome=genome))
       print("Making Guitar Coordinates ...")
       GuitarCoordsFromTxDb <- suppressMessages(makeGuitarCoordsFromTxDb(txdb))
+      GuitarCoords <- GuitarCoordsFromTxDb
     } else {
       print("Making Guitar Coordinates from provided TranscriptDb Object ...")
       GuitarCoordsFromTxDb <- makeGuitarCoordsFromTxDb(txdb, noBins=noBins)
+      GuitarCoords <- GuitarCoordsFromTxDb
     }
   } else {
     print("Using provided Guitar Coordinates")
@@ -117,10 +119,10 @@ GuitarPlot <- function(gfeatures,
 
 
 .makeFigure_nofill <- function(ct,
-                        GuitarCoordsFromTxDb,
-                        includeNeighborDNA,
-                        rescaleComponent,
-                        saveToPDFprefix) {
+                               GuitarCoordsFromTxDb,
+                               includeNeighborDNA,
+                               rescaleComponent,
+                               saveToPDFprefix) {
   
   # extract information of mRNA and lncRNA
   ct$weight <- ct$count # as numeric
@@ -129,10 +131,10 @@ GuitarPlot <- function(gfeatures,
   
   # save(ct1,ct2, includeNeighborDNA,rescaleComponent,saveToPDFprefix,GuitarCoordsFromTxDb, file = "data.Rdata")
   d <- mcols(GuitarCoordsFromTxDb)
-
+  
   # disable notes
   pos=Feature=weight=NULL
-
+  
   # plot
   if (includeNeighborDNA) {
     if (rescaleComponent==FALSE) {
@@ -217,7 +219,7 @@ GuitarPlot <- function(gfeatures,
         x1 <- cumsum(w1)
         x2 <- cumsum(w2)
       }
-
+      
       
       # adjust position
       id <- match(ct1$comp,c("Front","UTR5","CDS","UTR3","Back"))
@@ -275,26 +277,26 @@ GuitarPlot <- function(gfeatures,
         xlim(0,1) +
         theme(legend.position="bottom")
     }
-     
+    
   } 
   
   if (includeNeighborDNA==FALSE) {
-      
+    
     # remove DNA
-      id1 <- which(match(ct1$comp,c("Front","Back")) >0 )
-      ct1 <- ct1[-id1,]
-      id2 <- which(match(ct2$comp,c("Front","Back")) >0 )
-      ct2 <- ct2[-id2,]  
+    id1 <- which(match(ct1$comp,c("Front","Back")) >0 )
+    ct1 <- ct1[-id1,]
+    id2 <- which(match(ct2$comp,c("Front","Back")) >0 )
+    ct2 <- ct2[-id2,]  
+    
+    # normalize feature
+    featureSet <- as.character(unique(ct$Feature))
+    for (i in 1:length(featureSet)) {
+      id <- (ct1$Feature==featureSet[i])
+      ct1$weight[id] <- ct1$weight[id]/sum(ct1$weight[id])
       
-      # normalize feature
-      featureSet <- as.character(unique(ct$Feature))
-      for (i in 1:length(featureSet)) {
-        id <- (ct1$Feature==featureSet[i])
-        ct1$weight[id] <- ct1$weight[id]/sum(ct1$weight[id])
-        
-        id <- (ct2$Feature==featureSet[i])
-        ct2$weight[id] <- ct2$weight[id]/sum(ct2$weight[id])
-      }
+      id <- (ct2$Feature==featureSet[i])
+      ct2$weight[id] <- ct2$weight[id]/sum(ct2$weight[id])
+    }
     
     p2 <- 
       ggplot(ct2, aes(x=pos, group=Feature, weight=weight)) + 
@@ -322,7 +324,7 @@ GuitarPlot <- function(gfeatures,
       temp <-temp/sum(temp)
       weight <- temp
       names(weight) <- c("5'UTR","CDS","3'UTR")
-
+      
       
       # density
       cds_id <- which(ct1$comp=="CDS")
@@ -360,8 +362,8 @@ GuitarPlot <- function(gfeatures,
         annotate("rect", xmin = 0, xmax = x[1], ymin = -0.12, ymax = -0.08, alpha = .99, colour = "black")+
         annotate("rect", xmin = x[2], xmax = 1, ymin = -0.12, ymax = -0.08, alpha = .99, colour = "black")+
         annotate("rect", xmin = x[1], xmax = x[2], ymin = -0.16, ymax = -0.04, alpha = .2, colour = "black")
-        
-        
+      
+      
     } else {
       
       pos_adjust <- match(ct1$comp,c("UTR5","CDS","UTR3"))-1
@@ -404,10 +406,10 @@ GuitarPlot <- function(gfeatures,
 
 
 .makeFigure_fill <- function(ct,
-                        GuitarCoordsFromTxDb,
-                        includeNeighborDNA,
-                        rescaleComponent,
-                        saveToPDFprefix) {
+                             GuitarCoordsFromTxDb,
+                             includeNeighborDNA,
+                             rescaleComponent,
+                             saveToPDFprefix) {
   
   # extract information of mRNA and lncRNA
   ct$weight <- ct$count # as numeric
@@ -419,7 +421,7 @@ GuitarPlot <- function(gfeatures,
   
   # disable notes
   pos=Feature=weight=NULL
-
+  
   # plot
   if (includeNeighborDNA) {
     if (rescaleComponent==FALSE) {
