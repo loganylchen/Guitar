@@ -37,3 +37,6 @@ version 1.9.3: (2016-4-2)
 
 version 1.9.4: (2016-4-15)
 - Bug Fix
+
+version 1.9.6: (2016-6-17)
+- Added "adjust" parameter to GuitarPlot function

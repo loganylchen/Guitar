@@ -12,7 +12,7 @@ GuitarPlot(gfeatures, GuitarCoordsFromTxDb = NA,
   txdb = NA, genome = NA, 
   noBins = 10, saveToPDFprefix = NA, 
   returnCount = FALSE, includeNeighborDNA = FALSE,
-  maximalFeatureAmbiguity=5, rescaleComponent=TRUE, fill=FALSE)
+  maximalFeatureAmbiguity=5, rescaleComponent=TRUE, fill=FALSE, adjust=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -44,10 +44,13 @@ Whether neighborhood DNA regions should be included in the GuitarPlot.
 Features that overlap with more than this number of transcripts will not be used in the analysis. If a genomic feature overlaps with multiple transcripts but the number doesn't exceed this threshold, its weight will be evenly divided. Default: 5
 }
   \item{rescaleComponent}{
-Whether the actual length of different components should be reflected in the generated figure. 5'UTR is usually much shorter than other components, so if this option is turned on, 5'UTR can be difficult to be observed; however, this difficulty is resulted from its short width. Default: TRUE.
+Adjustment of the bandwidth. Default: 1.
 }
   \item{fill}{
 Whether calculate the relative location-standardized density or not. If set "TRUE", the density of tracks will be standardized with respect to each location. Default: FALSE
+}
+  \item{adjust}{
+Whether calculate the relative location-standardized density or not. If set "TRUE", the density of tracks will be standardized with respect to each location. Default: 1
 }
 }
 \details{

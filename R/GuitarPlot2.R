@@ -10,7 +10,8 @@ GuitarPlot <- function(gfeatures,
                        includeNeighborDNA=FALSE,
                        maximalFeatureAmbiguity=5,
                        rescaleComponent=TRUE,
-                       fill=FALSE){
+                       fill=FALSE,
+                       adjust=1){
   
   # make sure the Guitar coordinates are available
   suppressWarnings(
@@ -63,13 +64,15 @@ GuitarPlot <- function(gfeatures,
                        GuitarCoordsFromTxDb,
                        includeNeighborDNA,
                        rescaleComponent,
-                       saveToPDFprefix)
+                       saveToPDFprefix,
+                       adjust)
   } else {
     .makeFigure_fill(ct,
                      GuitarCoordsFromTxDb,
                      includeNeighborDNA,
                      rescaleComponent,
-                     saveToPDFprefix)
+                     saveToPDFprefix,
+                     adjust)
   }
   
   
@@ -122,7 +125,7 @@ GuitarPlot <- function(gfeatures,
                                GuitarCoordsFromTxDb,
                                includeNeighborDNA,
                                rescaleComponent,
-                               saveToPDFprefix) {
+                               saveToPDFprefix,adjust=adjust) {
   
   # extract information of mRNA and lncRNA
   ct$weight <- ct$count # as numeric
@@ -160,7 +163,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2) +
+        geom_density(adjust=adjust,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2) +
         annotate("text", x = 1.5, y = -0.2, label = "5'UTR") +
         annotate("text", x = 2.5, y = -0.2, label = "CDS") +
         annotate("text", x = 0.5, y = -0.2, label = "Promoter (1kb)") +
@@ -183,7 +186,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2) +
+        geom_density(adjust=adjust,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2) +
         annotate("text", x = 1.5, y = -0.2, label = "lncRNA") +
         annotate("text", x = 0.5, y = -0.2, label = "Promoter (1kb)") +
         annotate("text", x = 2.5, y = -0.2, label = "Tail (1kb)")  + 
@@ -247,7 +250,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
+        geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
         annotate("text", x = sum(x1[1:2])/2, y = -0.2, label = "5'UTR") +
         annotate("text", x = sum(x1[2:3])/2, y = -0.2, label = "CDS") +
         annotate("text", x = x1[1]/2, y = -0.2, label = "Promoter (1kb)") +
@@ -268,7 +271,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
+        geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
         annotate("text", x = sum(x2[1:2])/2, y = -0.2, label = "lncRNA") +
         annotate("text", x = x2[1]/2, y = -0.2, label = 'Promoter (1kb)') +
         annotate("text", x = sum(x2[2:3])/2, y = -0.2, label = "Tail (1kb)")  +
@@ -304,7 +307,7 @@ GuitarPlot <- function(gfeatures,
       theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
       xlab("") + 
       ylab("Frequency") +
-      geom_density(adjust=0.5,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
+      geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
       annotate("text", x = 0.5, y = -0.2, label = "lncRNA")+
       annotate("rect", xmin = 0, xmax = 1, ymin = -0.12, ymax = -0.08, alpha = .99, colour = "black")+
       theme(legend.position="bottom")
@@ -353,7 +356,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
+        geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2) +
         annotate("text", x = x[1]/2, y = -0.2, label = "5'UTR") +
         annotate("text", x = x[1] + weight[2]/2, y = -0.2, label = "CDS") +
         annotate("text", x = x[2] + weight[3]/2, y = -0.2, label = "3'UTR") + 
@@ -374,7 +377,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(aes(fill=factor(Feature)),alpha=0.2) +
+        geom_density(adjust=adjust,aes(fill=factor(Feature)),alpha=0.2) +
         annotate("text", x = 0.5, y = -0.2, label = "5'UTR") +
         annotate("text", x = 1.5, y = -0.2, label = "CDS") +
         annotate("text", x = 2.5, y = -0.2, label = "3'UTR") + 
@@ -409,7 +412,7 @@ GuitarPlot <- function(gfeatures,
                              GuitarCoordsFromTxDb,
                              includeNeighborDNA,
                              rescaleComponent,
-                             saveToPDFprefix) {
+                             saveToPDFprefix,adjust=adjust) {
   
   # extract information of mRNA and lncRNA
   ct$weight <- ct$count # as numeric
@@ -417,6 +420,7 @@ GuitarPlot <- function(gfeatures,
   ct2 <- ct[ct$category=="lncRNA",] # lncRNA
   
   # save(ct1,ct2, includeNeighborDNA,rescaleComponent,saveToPDFprefix,GuitarCoordsFromTxDb, file = "data.Rdata")
+
   d <- mcols(GuitarCoordsFromTxDb)
   
   # disable notes
@@ -447,7 +451,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2,position="fill") +
+        geom_density(adjust=adjust,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2,position="fill") +
         annotate("text", x = 1.5, y = -0.2, label = "5'UTR") +
         annotate("text", x = 2.5, y = -0.2, label = "CDS") +
         annotate("text", x = 0.5, y = -0.2, label = "Promoter (1kb)") +
@@ -470,7 +474,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2,position="fill") +
+        geom_density(adjust=adjust,aes(fill=factor(Feature), colour=factor(Feature)),alpha=0.2,position="fill") +
         annotate("text", x = 1.5, y = -0.2, label = "lncRNA") +
         annotate("text", x = 0.5, y = -0.2, label = "Promoter (1kb)") +
         annotate("text", x = 2.5, y = -0.2, label = "Tail (1kb)")  + 
@@ -534,7 +538,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
+        geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
         annotate("text", x = sum(x1[1:2])/2, y = -0.2, label = "5'UTR") +
         annotate("text", x = sum(x1[2:3])/2, y = -0.2, label = "CDS") +
         annotate("text", x = x1[1]/2, y = -0.2, label = "Promoter (1kb)") +
@@ -555,7 +559,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(adjust=0.5,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
+        geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
         annotate("text", x = sum(x2[1:2])/2, y = -0.2, label = "lncRNA") +
         annotate("text", x = x2[1]/2, y = -0.2, label = 'Promoter (1kb)') +
         annotate("text", x = sum(x2[2:3])/2, y = -0.2, label = "Tail (1kb)")  +
@@ -591,7 +595,7 @@ GuitarPlot <- function(gfeatures,
       theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
       xlab("") + 
       ylab("Frequency") +
-      geom_density(adjust=0.5,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
+      geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
       annotate("text", x = 0.5, y = -0.2, label = "lncRNA")+
       annotate("rect", xmin = 0, xmax = 1, ymin = -0.12, ymax = -0.08, alpha = .99, colour = "black")+
       theme(legend.position="bottom")
@@ -640,7 +644,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
+        geom_density(adjust=adjust,aes(fill=factor(Feature),colour=factor(Feature)),alpha=0.2,position="fill") +
         annotate("text", x = x[1]/2, y = -0.2, label = "5'UTR") +
         annotate("text", x = x[1] + weight[2]/2, y = -0.2, label = "CDS") +
         annotate("text", x = x[2] + weight[3]/2, y = -0.2, label = "3'UTR") + 
@@ -661,7 +665,7 @@ GuitarPlot <- function(gfeatures,
         theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + 
         xlab("") + 
         ylab("Frequency") +
-        geom_density(aes(fill=factor(Feature)),alpha=0.2,position="fill") +
+        geom_density(adjust=adjust,aes(fill=factor(Feature)),alpha=0.2,position="fill") +
         annotate("text", x = 0.5, y = -0.2, label = "5'UTR") +
         annotate("text", x = 1.5, y = -0.2, label = "CDS") +
         annotate("text", x = 2.5, y = -0.2, label = "3'UTR") + 
