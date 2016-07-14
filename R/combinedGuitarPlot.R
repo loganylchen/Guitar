@@ -1,6 +1,6 @@
 combinedGuitarPlot <- function(ct){ 
   # stack
-  
+  adjust=1
   
   # plot the figure
   # extract information of mRNA and lncRNA
