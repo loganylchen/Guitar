@@ -8,12 +8,15 @@ combinedGuitarPlot
 combine multiple GuitarPlots, especially when they are from different species and cannot directly handled with GuitarPlot function together.
 }
 \usage{
-combinedGuitarPlot(ct)
+combinedGuitarPlot(ct, comLength = c(0.136,0.459, 0.405))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
    \item{ct}{
 Count of overlapping features, which is can be the output from GuitarPlot function. See example. 
+}
+   \item{comLength}{
+a vector of 3 elements,indicating the length of 5'UTR, CDS and 3'UTR in the figure. Default: c(0.136,0.459, 0.405), which is counted from the default setting of hg19 UCSC gene annotation.
 }
 }
 \details{

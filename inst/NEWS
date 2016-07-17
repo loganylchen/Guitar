@@ -44,5 +44,6 @@ version 1.9.6: (2016-6-17)
 version 1.9.6: (2016-6-17)
 - Added "adjust" parameter to GuitarPlot function
 
-Version: 1.11.7 (2016-7-14)
+Version: 1.11.9 (2016-7-14)
 - Added "combinedGuitarPlot" function to support comparison of different species within a single figure.
+- Allow rescale
