@@ -1,7 +1,7 @@
 Package: Guitar2
 Type: Package
 Title: Guitar2
-Version: 0.99.1
+Version: 2.0.0
 Date: 2019-04-26
 Author: Xiao Du
 Maintainer: Xiao Du <xiao.du@cumt.edu.cn>
@@ -13,5 +13,5 @@ Depends: GenomicFeatures, rtracklayer,AnnotationDbi, GenomicRanges, dplyr, ggplo
 biocViews: Sequencing, SplicedAlignment, Alignment, DataImport, RNASeq,
         MethylSeq, QualityControl, Transcription
 NeedsCompilation: no
-Packaged: 2017-09-29 06:51:32 UTC; j
+Packaged: 2019-04-24 06:51:32 UTC; j
 RoxygenNote: 6.1.1
