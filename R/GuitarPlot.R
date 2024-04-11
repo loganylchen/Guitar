@@ -126,7 +126,7 @@
 for (GroupName in names(sitesPointsRelative)) {
   sitesWeight <- sitesPointWeight[[GroupName]] / sum(sitesPointWeight[[GroupName]])
   siteID <- sitesPointsRelative[[GroupName]]
-  print(paste("calculate density for", GroupName, "with", length(siteID), "points")
+  print(paste("calculate density for", GroupName, "with", length(siteID), "points"))
   # fit1 <- suppressWarnings(density(siteID, adjust = adjust,n=256,from=0,to=1, weight=sitesWeight))
   fit1 <- suppressWarnings(density(siteID, adjust = adjust,from = 0, to = 1,n = 256, weight=sitesWeight))
 
