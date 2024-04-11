@@ -233,7 +233,7 @@ return(densityDataframe)
     
     # load the txGuitarTxdb file
     print(paste("load", txGuitarTxdb, "as GuitarTxdb...", sep = " "))
-    guitarTxdb <- read.table(txGuitarTxdb,sep="\t")
+    guitarTxdb <- readRDS(txGuitarTxdb)
   } else {
     txdb <- .getTxdb(
       txGTF = txGTF,
@@ -439,8 +439,8 @@ GuitarPlot <- function(txGTF = NULL,
   )
   print(format(Sys.time(), "%Y%m%d%H%M%S"))
   if (!(is.na(txGuitarTxdbSaveFile))) {
-    txGuitarTxdbSaveFile <- paste("GuitarTxdb", txGuitarTxdbSaveFile, format(Sys.time(), "%Y%m%d"), sep = "-")    # note: should be check later
-    save(guitarTxdb, file = txGuitarTxdbSaveFile)
+#     txGuitarTxdbSaveFile <- paste("GuitarTxdb", txGuitarTxdbSaveFile, format(Sys.time(), "%Y%m%d"), sep = "-")    # note: should be check later
+    saveRDS(guitarTxdb, file = txGuitarTxdbSaveFile)
   }
   
   
