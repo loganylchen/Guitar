@@ -469,9 +469,9 @@ GuitarPlot <- function(txGTF = NULL,
     
     for (txType in pltTxType) {
       sitesPointsNormlize[[txType]][[GroupName]] <- normalize(sitesPoints, guitarTxdb, txType,overlapIndex,siteLengthIndex)
-      print(paste("normalize", GroupName, "for", txType, "done")
+      print(paste("normalize", GroupName, "for", txType, "done"))
       print(paste("sitesPoints:", length(sitesPoints),",NA in ?: ",length(na.omit(sitesPoints)),"normalized:",
-      length(sitesPointsNormlize[[txType]][[GroupName]][[1]]), ",NA in ?: ",length(na.omit(sitesPointsNormlize[[txType]][[GroupName]][[1]])))
+      length(sitesPointsNormlize[[txType]][[GroupName]][[1]]), ",NA in ?: ",length(na.omit(sitesPointsNormlize[[txType]][[GroupName]][[1]]))))
 
       sitesPointsRelative[[txType]][[GroupName]] <- sitesPointsNormlize[[txType]][[GroupName]][[1]]
       pointWeight[[txType]][[GroupName]] <- sitesPointsNormlize[[txType]][[GroupName]][[2]]
