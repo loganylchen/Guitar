@@ -129,7 +129,8 @@ for (GroupName in names(sitesPointsRelative)) {
   print(paste("calculate density for", GroupName, "with", length(siteID), "points"))
   # fit1 <- suppressWarnings(density(siteID, adjust = adjust,n=256,from=0,to=1, weight=sitesWeight))
   fit1 <- suppressWarnings(density(siteID, adjust = adjust,from = 0, to = 1,n = 256, weight=sitesWeight))
-
+  print(paste("fit1 density for",names(fit1)))
+  print(paste("fit1$x density for",fit1$x))
   
   tmp <-  data.frame(
     x = fit1$x, 
