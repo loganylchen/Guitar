@@ -473,8 +473,8 @@ GuitarPlot <- function(txGTF = NULL,
       print(paste("sitesPoints:", length(sitesPoints),",NA in ?: ",length(na.omit(sitesPoints)),"normalized:",
       length(sitesPointsNormlize[[txType]][[GroupName]][[1]]), ",NA in ?: ",length(na.omit(sitesPointsNormlize[[txType]][[GroupName]][[1]]))))
 
-      sitesPointsRelative[[txType]][[GroupName]] <- sitesPointsNormlize[[txType]][[GroupName]][[1]]
-      pointWeight[[txType]][[GroupName]] <- sitesPointsNormlize[[txType]][[GroupName]][[2]]
+      sitesPointsRelative[[txType]][[GroupName]] <- sitesPointsNormlize[[txType]][[GroupName]][[1]][!is.na(sitesPointsNormlize[[txType]][[GroupName]][[1]])]
+      pointWeight[[txType]][[GroupName]] <- sitesPointsNormlize[[txType]][[GroupName]][[2]][!is.na(sitesPointsNormlize[[txType]][[GroupName]][[1]])]
     }
   }
   for (txType in pltTxType)
